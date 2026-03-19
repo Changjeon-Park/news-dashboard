@@ -34,18 +34,18 @@ const themes = [
     candidateStocks: ["가온전선", "대한전선", "일진전기", "광명전기"]
   },
   {
-    name: "로봇",
-    query: "휴머노이드 OR 산업용 로봇 OR 두산로보틱스 OR 레인보우로보틱스",
-    fallbackQuery: "로봇 OR 자동화 OR 협동로봇 OR 제조 자동화",
-    coreStocks: ["두산로보틱스", "레인보우로보틱스", "로보스타", "유일로보틱스"],
-    candidateStocks: ["로보티즈", "뉴로메카", "에브리봇", "삼익THK"]
-  },
+  name: "로봇",
+  query: "휴머노이드 OR 산업용 로봇 OR 두산로보틱스 OR 레인보우로보틱스 OR 보스턴다이내믹스 OR 현대오토에버",
+  fallbackQuery: "로봇 OR 자동화 OR 협동로봇 OR 제조 자동화 OR 보스턴다이내믹스 OR 현대오토에버 OR 현대무벡스",
+  coreStocks: ["두산로보틱스", "레인보우로보틱스", "현대오토에버"],
+  candidateStocks: ["로보티즈", "뉴로메카", "현대무벡스", "삼익THK"]
+},
   {
     name: "바이오",
-    query: "임상 3상 OR FDA 승인 OR 기술수출 OR 셀트리온 OR 삼성바이오로직스",
-    fallbackQuery: "바이오 OR 신약 OR CDMO OR 항암제 OR 바이오시밀러",
-    coreStocks: ["셀트리온", "삼성바이오로직스", "알테오젠", "유한양행"],
-    candidateStocks: ["리가켐바이오", "펩트론", "에스티팜", "보로노이"]
+  query: "임상 3상 OR FDA 승인 OR 기술수출 OR 셀트리온 OR 삼성바이오로직스 OR 알테오젠 OR 에이비엘바이오 OR 에이프릴바이오 OR 파마리서치",
+  fallbackQuery: "바이오 OR 신약 OR CDMO OR 항암제 OR 바이오시밀러 OR ADC OR 항체치료제 OR 플랫폼 기술수출",
+  coreStocks: ["셀트리온", "삼성바이오로직스", "알테오젠", "유한양행"],
+  candidateStocks: ["에이비엘바이오", "에이프릴바이오", "파마리서치", "리가켐바이오", "펩트론", "에스티팜"]
   },
   {
     name: "우주항공",
@@ -56,10 +56,10 @@ const themes = [
   },
   {
     name: "SpaceX+xAI",
-    query: "SpaceX OR 스타링크 OR xAI OR 머스크 OR 나스닥 상장",
-    fallbackQuery: "SpaceX OR xAI OR 스타링크 OR 우주 인터넷 OR 머스크",
-    coreStocks: ["인텔리안테크", "쎄트렉아이", "AP위성"],
-    candidateStocks: ["쏠리드", "에치에프알", "센서뷰", "오이솔루션", "케이엠더블유"]
+  query: "SpaceX OR 스타링크 OR xAI OR 위성 통신 OR 저궤도 위성 OR 위성 인터넷",
+  fallbackQuery: "스타링크 OR 위성 통신 OR 저궤도 위성 OR 위성 인터넷",
+  coreStocks: ["인텔리안테크", "쎄트렉아이", "AP위성"],
+  candidateStocks: ["쏠리드", "에치에프알", "센서뷰", "오이솔루션", "케이엠더블유"]
   },
   {
     name: "방산",
@@ -67,13 +67,61 @@ const themes = [
     fallbackQuery: "방산 OR 방위산업 OR 무기체계 OR 미사일 OR 탄약",
     coreStocks: ["한화에어로스페이스", "현대로템", "LIG넥스원", "풍산"],
     candidateStocks: ["빅텍", "스페코", "퍼스텍", "휴니드"]
-  }
+  },
 ];
 
 const preferredSources = [
   "한국경제", "매일경제", "아주경제", "조선비즈", "머니투데이",
   "연합뉴스", "전자신문", "서울경제", "이데일리", "뉴시스"
 ];
+
+const themeAutoMentionPools = {
+  "반도체": [
+    "삼성전자", "SK하이닉스", "한미반도체", "리노공업",
+    "ISC", "테크윙", "이오테크닉스", "하나마이크론", "삼성전기"
+  ],
+  "원전": [
+    "두산에너빌리티", "한전기술", "한국전력", "비에이치아이",
+    "보성파워텍", "일진파워", "우진", "우리기술"
+  ],
+  "전력": [
+    "LS ELECTRIC", "효성중공업", "제룡전기", "HD현대일렉트릭",
+    "가온전선", "대한전선", "일진전기", "광명전기", "제일일렉트릭"
+  ],
+  "로봇": [
+    "삼성전기", "LG이노텍", "로보티즈", "뉴로메카",
+    "현대무벡스", "삼익THK", "레인보우로보틱스",
+    "두산로보틱스", "현대오토에버"
+  ],
+  "바이오": [
+    "셀트리온", "삼성바이오로직스", "알테오젠", "유한양행",
+    "에이비엘바이오", "에이프릴바이오", "파마리서치",
+    "리가켐바이오", "펩트론", "에스티팜"
+  ],
+  "우주항공": [
+    "한화에어로스페이스", "쎄트렉아이", "컨텍", "한국항공우주",
+    "제노코", "켄코아에어로스페이스", "루미르", "AP위성", "삼성전기"
+  ],
+  "SpaceX+xAI": [
+    "삼성전기", "인텔리안테크", "쎄트렉아이", "AP위성",
+    "쏠리드", "에치에프알", "센서뷰", "오이솔루션", "케이엠더블유"
+  ],
+  "방산": [
+    "한화에어로스페이스", "현대로템", "LIG넥스원", "풍산",
+    "빅텍", "스페코", "퍼스텍", "휴니드"
+  ]
+};
+
+const themeAutoCandidates = {
+  "반도체": ["삼성전기", "ISC", "테크윙", "이오테크닉스", "하나마이크론", "주성엔지니어링", "원익IPS"],
+  "원전": ["비에이치아이", "보성파워텍", "일진파워", "우진", "우리기술", "한전산업"],
+  "전력": ["가온전선", "대한전선", "일진전기", "광명전기", "제룡산업", "제일일렉트릭", "HD현대일렉트릭"],
+  "로봇": ["현대오토에버", "현대무벡스", "로보티즈", "뉴로메카", "삼익THK", "에스비비테크"],
+  "바이오": ["셀트리온", "알테오젠", "유한양행", "리가켐바이오", "펩트론", "에스티팜", "보로노이"],
+  "우주항공": ["한화에어로스페이스", "쎄트렉아이", "AP위성", "컨텍", "제노코", "켄코아에어로스페이스", "루미르"],
+  "SpaceX+xAI": ["삼성전기", "인텔리안테크", "쎄트렉아이", "AP위성", "쏠리드", "에치에프알", "센서뷰", "오이솔루션", "케이엠더블유"],
+  "방산": ["한화에어로스페이스", "현대로템", "LIG넥스원", "풍산", "빅텍", "스페코", "퍼스텍", "휴니드"]
+};
 
 let cache = {
   updatedAt: null,
@@ -252,10 +300,10 @@ function themeRelevanceScore(title, theme) {
     "반도체": ["반도체", "hbm", "파운드리", "cxl", "후공정", "패키징", "tc본더"],
     "원전": ["원전", "원자력", "smr", "체코", "기자재"],
     "전력": ["전력", "변압기", "송배전", "전선", "ess", "데이터센터"],
-    "로봇": ["로봇", "휴머노이드", "자동화", "협동로봇"],
+    "로봇": ["로봇", "휴머노이드", "자동화", "협동로봇", "보스턴다이내믹스", "현대오토에버", "현대무벡스"],
     "바이오": ["바이오", "신약", "임상", "fda", "기술수출", "cdmo"],
     "우주항공": ["우주", "항공", "위성", "발사체", "누리호"],
-    "SpaceX+xAI": ["spacex", "xai", "스타링크", "머스크", "우주 인터넷"],
+    "SpaceX+xAI": ["spacex", "xai", "스타링크", "위성 통신", "저궤도 위성", "위성 인터넷"],
     "방산": ["방산", "국방", "미사일", "탄약", "수출", "무기체계"]
   };
 
@@ -267,15 +315,60 @@ function themeRelevanceScore(title, theme) {
   return score;
 }
 
+function forceRobotTheme(title) {
+  const text = (title || "").toLowerCase();
+
+  const robotKeywords = [
+    "보스턴다이내믹스",
+    "boston dynamics",
+    "humanoid",
+    "휴머노이드",
+    "로봇",
+    "자동화"
+  ];
+
+  return robotKeywords.some(k => text.includes(k.toLowerCase()));
+}
+
 function buildNewsScore(item, theme = null) {
   let score = 0;
+  const title = item.title || "";
+  const lowerTitle = title.toLowerCase();
+
+  // 기존 점수 체계 유지
   score += sourcePriority(item.source || "");
   score += recencyPriority(item.pubDate || "");
-  score += qualityPriority(item.title || "");
+  score += qualityPriority(title);
 
+  // 테마 관련성 유지
   if (theme) {
-    score += themeRelevanceScore(item.title || "", theme);
+    score += themeRelevanceScore(title, theme);
   }
+
+  // 종목 직접 언급 가중치 강화
+  if (theme) {
+    const stockKeywords = [...theme.coreStocks, ...theme.candidateStocks]
+      .map(v => v.toLowerCase());
+
+    stockKeywords.forEach(keyword => {
+      if (lowerTitle.includes(keyword)) {
+        score += 10;
+      }
+    });
+  }
+
+  // 강한 이벤트 기사 추가 가점
+  const strongEvents = [
+    "수주", "계약", "승인", "허가", "실적", "흑자", "투자",
+    "증설", "확대", "수출", "기술수출", "공급", "양산", "상용화",
+    "도입", "선정", "체결", "fda", "임상", "3상", "2상", "1상"
+  ];
+
+  strongEvents.forEach(keyword => {
+    if (lowerTitle.includes(keyword.toLowerCase())) {
+      score += 2;
+    }
+  });
 
   return score;
 }
@@ -307,6 +400,32 @@ function sortNews(news) {
   });
 }
 
+function limitNewsPerStock(news, stockPool = [], maxPerStock = 3, totalLimit = 6) {
+  const stockCounts = {};
+  const result = [];
+
+  for (const item of news) {
+    const title = item.title || "";
+
+    const matchedStock = stockPool.find(stock => title.includes(stock));
+
+    if (!matchedStock) {
+      result.push(item);
+    } else {
+      stockCounts[matchedStock] = stockCounts[matchedStock] || 0;
+
+      if (stockCounts[matchedStock] < maxPerStock) {
+        stockCounts[matchedStock] += 1;
+        result.push(item);
+      }
+    }
+
+    if (result.length >= totalLimit) break;
+  }
+
+  return result;
+}
+
 async function parseGoogleNews(query, theme = null) {
   const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=ko&gl=KR&ceid=KR:ko`;
   const feed = await parser.parseURL(rssUrl);
@@ -326,12 +445,12 @@ async function parseGoogleNews(query, theme = null) {
   });
 
   const recentOnly = items.filter(item => isRecentNews(item.pubDate, 7));
-const base = recentOnly.length ? recentOnly : items;
+  const base = recentOnly.length ? recentOnly : items;
 
-const filtered = base.filter(item => isRelevantNews(item.title, theme));
-const finalBase = filtered.length ? filtered : base;
+  const filtered = base.filter(item => isRelevantNews(item.title, theme));
+  const finalBase = filtered.length ? filtered : base;
 
-const deduped = dedupeNews(finalBase).map(item => ({
+  const deduped = dedupeNews(finalBase).map(item => ({
   ...item,
   score: buildNewsScore(item, theme)
 }));
@@ -343,17 +462,24 @@ async function fetchThemeNews(theme, count = 6) {
   try {
     let news = await parseGoogleNews(theme.query, theme);
 
-    if (news.length < 3 && theme.fallbackQuery) {
-      const fallbackNews = await parseGoogleNews(theme.fallbackQuery, theme);
-      news = sortNews(
-        dedupeNews([...news, ...fallbackNews]).map(item => ({
-          ...item,
-          score: buildNewsScore(item, theme)
-        }))
-      );
+    if (theme.name !== "로봇") {
+      news = news.filter(item => !forceRobotTheme(item.title));
     }
 
-    return news.slice(0, count);
+    if (news.length < 3 && theme.fallbackQuery) {
+  const fallbackNews = await parseGoogleNews(theme.fallbackQuery, theme);
+  news = sortNews(
+    dedupeNews([...news, ...fallbackNews]).map(item => ({
+      ...item,
+      score: buildNewsScore(item, theme)
+    }))
+  );
+}
+
+const stockPool = themeAutoMentionPools[theme.name]
+  || [...theme.coreStocks, ...theme.candidateStocks];
+
+return limitNewsPerStock(news, stockPool, 3, count);
   } catch (error) {
     console.error(`뉴스 로드 실패: ${theme.name}`, error.message);
     return [];
@@ -395,6 +521,100 @@ function scoreStocks(stockList, news) {
     });
   });
   return Object.entries(scoreMap).sort((a, b) => b[1] - a[1]);
+}
+
+function extractStockMentions(newsList, stockPool = []) {
+  const counts = {};
+
+  newsList.forEach(news => {
+    const title = (news.title || "").toLowerCase();
+
+    stockPool.forEach(stock => {
+      if (title.includes(stock.toLowerCase())) {
+        counts[stock] = (counts[stock] || 0) + 1;
+      }
+    });
+  });
+
+  return counts;
+}
+
+function getAutoCandidateStocks(counts, existingStocks = [], minCount = 2, maxAdd = 2) {
+  return Object.entries(counts)
+    .filter(([stock, count]) => count >= minCount && !existingStocks.includes(stock))
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, maxAdd)
+    .map(([stock]) => stock);
+}
+
+function extractStockMentions(newsList, stockPool = []) {
+  const counts = {};
+
+  newsList.forEach(news => {
+    const title = (news.title || "").toLowerCase();
+
+    stockPool.forEach(stock => {
+      if (title.includes(stock.toLowerCase())) {
+        counts[stock] = (counts[stock] || 0) + 1;
+      }
+    });
+  });
+
+  return counts;
+}
+
+function getAutoCandidateStocks(counts, existingStocks = [], minCount = 2, maxAdd = 2) {
+  return Object.entries(counts)
+    .filter(([stock, count]) => count >= minCount && !existingStocks.includes(stock))
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, maxAdd)
+    .map(([stock]) => stock);
+}
+
+function scoreMentionedStocks(theme, news) {
+  const candidates = themeAutoCandidates[theme.name] || [];
+  const scores = {};
+
+  candidates.forEach(stock => {
+    scores[stock] = 0;
+
+    news.forEach(item => {
+      const title = item.title || "";
+      if (title.includes(stock)) {
+        scores[stock] += 5;
+
+        if (
+          title.includes("수주") ||
+          title.includes("계약") ||
+          title.includes("승인") ||
+          title.includes("허가") ||
+          title.includes("실적") ||
+          title.includes("투자") ||
+          title.includes("확대") ||
+          title.includes("수출") ||
+          title.includes("공급") ||
+          title.includes("양산") ||
+          title.includes("기술수출")
+        ) {
+          scores[stock] += 2;
+        }
+      }
+    });
+  });
+
+  return Object.entries(scores)
+    .filter(([, score]) => score > 0)
+    .sort((a, b) => b[1] - a[1]);
+}
+
+function mergeAutoCandidateStocks(theme, news, existingCandidates, existingCore) {
+  const existingSet = new Set([...existingCandidates, ...existingCore]);
+  const mentioned = scoreMentionedStocks(theme, news)
+    .map(([name]) => name)
+    .filter(name => !existingSet.has(name))
+    .slice(0, 2);
+
+  return [...existingCandidates, ...mentioned].slice(0, 7);
 }
 
 function pickCoreStocks(theme, news) {
@@ -459,7 +679,7 @@ function generateBrief(themeName, coreStocks, candidateStocks) {
       "- SpaceX+xAI는 머스크 생태계 테마 확산 속도로 움직이는 경우가 많습니다.",
       "- 단순 테마 기사보다 실제 투자·지분·납품 연결 기사 비중을 보셔야 합니다.",
       `- 핵심 종목은 ${a} 중심으로 체크하시면 됩니다.`,
-      b ? `- 후보 종목은 ${b} 등 투자/벤처 연결주입니다.` : "- 오늘은 핵심 종목 중심 반응이 강합니다.",
+      b ? `- 후보 종목은 ${b} 등 위성통신/부품 확산주입니다.` : "- 오늘은 핵심 종목 중심 반응이 강합니다.",
       "- 기사 강도보다 연결고리의 실체가 중요합니다."
     ],
     "방산": [
@@ -533,24 +753,61 @@ function isRelevantNews(title) {
 async function buildBriefing() {
   const results = [];
 
-  for (const theme of themes) {
-    const news = await fetchThemeNews(theme, 6);
-    const signal = analyzeTheme(theme.name);
-    const coreStocks = pickCoreStocks(theme, news);
-    const candidateStocks = pickCandidateStocks(theme, news);
-    const briefing = generateBrief(theme.name, coreStocks, candidateStocks);
+for (const theme of themes) {
+  const news = await fetchThemeNews(theme, 6);
 
-    results.push({
-      theme,
-      news,
-      signal,
-      coreStocks,
-      candidateStocks,
-      briefing
-    });
+  const signal = analyzeTheme(theme.name);
+  const coreStocks = pickCoreStocks(theme, news);
+  const baseCandidateStocks = [...theme.candidateStocks];
 
-    await sleep(250);
+  let autoCandidates = [];
+
+  const stockPool = themeAutoMentionPools[theme.name] || [];
+
+  if (stockPool.length > 0) {
+    const counts = extractStockMentions(news, stockPool);
+
+    const minCountMap = {
+      "바이오": 1,
+      "SpaceX+xAI": 1,
+      "로봇": 1,
+      "우주항공": 1
+    };
+
+    const minCount = minCountMap[theme.name] || 2;
+
+    autoCandidates = getAutoCandidateStocks(
+      counts,
+      [...coreStocks, ...baseCandidateStocks],
+      minCount
+    );
+
+    console.log(`${theme.name} counts:`, counts);
+    console.log(`${theme.name} autoCandidates:`, autoCandidates);
   }
+
+  const autoDetectedSet = new Set(autoCandidates);
+
+  const candidateStocks = [...new Set([
+    ...baseCandidateStocks,
+    ...autoCandidates
+  ])].slice(0, 7);
+
+  const briefing = generateBrief(theme.name, coreStocks, candidateStocks);
+
+  results.push({
+    theme,
+    news,
+    signal,
+    coreStocks,
+    candidateStocks,
+    autoCandidates,
+    autoDetectedStocks: [...autoDetectedSet],
+    briefing
+  });
+
+  await sleep(250);
+}
 
   const payload = {
     updatedAt: formatDateToIso(new Date()),

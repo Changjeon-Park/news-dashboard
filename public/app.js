@@ -95,7 +95,15 @@ function renderTopPicks(picks) {
 }
 
 function createThemeCard(result) {
-  const { theme, news, signal, coreStocks, candidateStocks, briefing } = result;
+  const {
+    theme,
+    news,
+    signal,
+    coreStocks,
+    candidateStocks,
+    briefing,
+    autoCandidates = []
+  } = result;
 
   return `
     <section class="card">
@@ -127,7 +135,11 @@ function createThemeCard(result) {
           <div class="stock-tags">
             ${
               candidateStocks.length
-                ? candidateStocks.map(stock => `<span class="stock-tag candidate">${stock}</span>`).join("")
+                ? candidateStocks.map(stock => `
+                    <span class="stock-tag candidate">
+                      ${stock}${autoCandidates.includes(stock) ? " (자동)" : ""}
+                    </span>
+                  `).join("")
                 : `<span class="stock-tag candidate">오늘은 신규 후보 부각 약함</span>`
             }
           </div>
@@ -140,11 +152,11 @@ function createThemeCard(result) {
               news.length === 0
                 ? `<div class="empty">관련 뉴스가 없습니다.</div>`
                 : news.map(item => `
-                  <div class="news-item">
-                    <a class="news-title" href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-                    <div class="news-meta">${item.source}${formatDate(item.pubDate) ? " · " + formatDate(item.pubDate) : ""}</div>
-                  </div>
-                `).join("")
+                    <div class="news-item">
+                      <a class="news-title" href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+                      <div class="news-meta">${item.source}${formatDate(item.pubDate) ? " · " + formatDate(item.pubDate) : ""}</div>
+                    </div>
+                  `).join("")
             }
           </div>
         </div>
