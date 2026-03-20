@@ -74,7 +74,7 @@ function renderTopNews(news) {
 function renderTopPicks(picks) {
   topPicks.innerHTML = `
     <div class="section-label">투자 아이디어</div>
-    <h2 class="summary-title">💰 오늘 관심 종목 TOP 3</h2>
+    <h2 class="summary-title">💰 오늘 관심 종목 TOP 5</h2>
     ${
       picks.length === 0
         ? `<div class="empty">추천 종목이 없습니다.</div>`
