@@ -2,16 +2,11 @@ const express = require("express");
 const path = require("path");
 const Parser = require("rss-parser");
 
-const app = express();
-const parser = new Parser({
-  customFields: {
-    item: ["source"]
-  }
-});
+const app = require("./app");
 
 const PORT = process.env.PORT || 10000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
 
@@ -968,8 +963,3 @@ app.get("/api/briefing", async (req, res) => {
     });
   }
 });
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on ${PORT}`);
-});
-
