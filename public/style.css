@@ -525,3 +525,261 @@ body {
   font-size: 13px;
   font-weight: 600;
 }
+
+/* ===== Responsive Layout: Tablet 2열 유지 / Mobile 1열 ===== */
+
+/* 기본: 데스크톱/태블릿 */
+.summary-grid,
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 카드 공통 */
+.summary-card,
+.card,
+.hero-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 긴 텍스트가 카드 밖으로 밀리는 현상 방지 */
+.pick-card,
+.pick-header,
+.pick-name,
+.pick-theme,
+.pick-reason,
+.news-title,
+.summary-news-link,
+.briefing-line,
+.insight,
+.card-title,
+.card-keyword {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 태블릿: 2열 유지, 간격/패딩만 약간 축소 */
+@media (max-width: 1024px) {
+  .app {
+    padding: 20px 16px 40px;
+  }
+
+  .summary-grid,
+  .dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .topbar {
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .hero-tags {
+    gap: 10px;
+  }
+
+  .card,
+  .summary-card,
+  .hero-card {
+    border-radius: 18px;
+  }
+}
+
+/* 모바일: 1열 강제 */
+@media (max-width: 767px) {
+  .app {
+    padding: 16px 12px 32px;
+  }
+
+  .topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .topbar h1 {
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .update-time {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .briefing-badge {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #refreshBtn {
+    flex: 0 0 auto;
+    min-width: 72px;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+  }
+
+  .summary-grid,
+  .dashboard {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .hero {
+    margin-top: 12px;
+  }
+
+  .hero-card,
+  .summary-card,
+  .card {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+
+  .hero-title,
+  .section-label,
+  .block-title,
+  .pick-theme,
+  .card-keyword,
+  .news-meta,
+  .summary-news-meta {
+    font-size: 12px;
+  }
+
+  .summary-title,
+  .card-title {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .pick-name {
+    font-size: 16px;
+    line-height: 1.35;
+  }
+
+  .pick-reason,
+  .insight,
+  .briefing-line,
+  .news-title,
+  .summary-news-link {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-tags,
+  .stock-tags {
+    gap: 8px;
+  }
+
+  .hero-tags .tag,
+  .stock-tag,
+  .signal {
+    font-size: 12px;
+    line-height: 1;
+    padding: 10px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .pick-header,
+  .card-title-row {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .pick-card {
+    padding: 14px 0;
+  }
+
+  .news-item,
+  .summary-news-item {
+    padding: 12px 0;
+  }
+
+  .footer {
+    margin-top: 28px;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+  }
+}
+
+/* 아주 작은 모바일 */
+@media (max-width: 420px) {
+  .topbar {
+    gap: 10px;
+  }
+
+  .topbar h1 {
+    font-size: 22px;
+  }
+
+  .hero-card,
+  .summary-card,
+  .card {
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+
+  #refreshBtn {
+    min-width: 64px;
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  .summary-title,
+  .card-title {
+    font-size: 17px;
+  }
+
+  .pick-name {
+    font-size: 15px;
+  }
+
+  .pick-reason,
+  .insight,
+  .briefing-line,
+  .news-title,
+  .summary-news-link {
+    font-size: 13px;
+  }
+
+  .hero-tags .tag,
+  .stock-tag,
+  .signal {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+}
+
+.pick-header > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.pick-name,
+.pick-theme,
+.pick-reason {
+  white-space: normal;
+}
+
+@media (max-width: 767px) {
+  #refreshBtn {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
