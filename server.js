@@ -13,23 +13,23 @@ app.listen(PORT, "0.0.0.0", () => {
 const themes = [
   {
     name: "반도체",
-    query: "HBM OR AI 반도체 OR 파운드리 OR 삼성전자 OR SK하이닉스 OR 한미반도체",
-    fallbackQuery: "반도체 OR 후공정 OR 소부장 OR CXL OR TC본더",
+    query: "HBM OR AI 반도체 OR 파운드리 OR 삼성전자 OR SK하이닉스 OR 한미반도체 OR 리노공업",
+    fallbackQuery: "반도체 OR 후공정 OR 소부장 OR CXL OR TC본더 OR HBF",
     coreStocks: ["삼성전자", "SK하이닉스", "한미반도체", "리노공업"],
-    candidateStocks: ["ISC", "테크윙", "이오테크닉스", "하나마이크론"]
+    candidateStocks: ["ISC", "테크윙", "이오테크닉스", "하나마이크론", "솔브레인"]
   },
   {
     name: "원전",
     query: "SMR OR 원전 수출 OR 두산에너빌리티 OR 한전기술 OR 한국전력",
     fallbackQuery: "원전 OR 원자력 OR 체코 원전 OR 원전 기자재",
-    coreStocks: ["두산에너빌리티", "한전기술", "한국전력", "비에이치아이"],
+    coreStocks: ["두산에너빌리티", "한전기술", "한국전력", "비에이치아이", "현대건설"],
     candidateStocks: ["보성파워텍", "일진파워", "우진", "우리기술"]
   },
   {
     name: "전력",
-    query: "데이터센터 전력 OR AI 전력 수요 OR 변압기 OR LS ELECTRIC OR 효성중공업",
+    query: "AI 데이터센터 OR 데이터센터 전력 OR AI 전력 수요 OR 변압기 OR LS ELECTRIC OR 효성중공업 OR HD현대일렉트릭",
     fallbackQuery: "전력 인프라 OR 송배전 OR 전선 OR ESS",
-    coreStocks: ["LS ELECTRIC", "효성중공업", "제룡전기", "HD현대일렉트릭"],
+    coreStocks: ["LS ELECTRIC", "효성중공업", "HD현대일렉트릭", "제룡전기"],
     candidateStocks: ["가온전선", "대한전선", "일진전기", "광명전기"]
   },
   {
