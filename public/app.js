@@ -596,8 +596,10 @@ function applyAdminStatsVisibility() {
   if (!statsWrap) return;
 
   if (isAdminView()) {
+    statsWrap.hidden = false;
     statsWrap.style.display = "grid";
   } else {
+    statsWrap.hidden = true;
     statsWrap.style.display = "none";
   }
 }
@@ -611,6 +613,18 @@ function getOrCreateVisitorId() {
   }
 
   return visitorId;
+}
+
+function renderStats(stats) {
+  const totalViewsEl = document.getElementById("totalViews");
+  const todayViewsEl = document.getElementById("todayViews");
+  const totalVisitorsEl = document.getElementById("totalVisitors");
+  const todayVisitorsEl = document.getElementById("todayVisitors");
+
+  if (totalViewsEl) totalViewsEl.textContent = Number(stats.totalViews || 0).toLocaleString();
+  if (todayViewsEl) todayViewsEl.textContent = Number(stats.todayViews || 0).toLocaleString();
+  if (totalVisitorsEl) totalVisitorsEl.textContent = Number(stats.totalVisitors || 0).toLocaleString();
+  if (todayVisitorsEl) todayVisitorsEl.textContent = Number(stats.todayVisitors || 0).toLocaleString();
 }
 
 async function trackVisitorStats() {
