@@ -779,10 +779,13 @@ body {
 }
 
 .mib-stats-wrap {
-  display: grid;
   grid-template-columns: repeat(4, minmax(140px, 1fr));
   gap: 12px;
   margin: 16px 0 20px;
+}
+
+.mib-stats-wrap.show {
+  display: grid;
 }
 
 .mib-stat-card {

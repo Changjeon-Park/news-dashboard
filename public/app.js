@@ -586,7 +586,24 @@ async function loadBriefing(force = false) {
   }
 }
 
-refreshBtn.addEventListener("click", () => loadBriefing(true));
-loadBriefing(false);
+function isAdminView() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("admin") === "1";
+}
 
+function applyAdminStatsVisibility() {
+  const statsWrap = document.getElementById("adminStats");
+  if (!statsWrap) return;
+
+  if (isAdminView()) {
+    statsWrap.style.display = "grid";
+  } else {
+    statsWrap.style.display = "none";
+  }
+}
+
+refreshBtn.addEventListener("click", () => loadBriefing(true));
+
+applyAdminStatsVisibility();
+loadBriefing(false);
 trackVisitorStats();

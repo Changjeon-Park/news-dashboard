@@ -5,6 +5,7 @@ const fs = require("fs");
 
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 const parser = new RSSParser({
   timeout: 15000,
   customFields: {
@@ -1652,5 +1653,5 @@ app.get("/api/briefing", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`MIB server running on port ${PORT}`);
 });
