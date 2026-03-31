@@ -602,6 +602,42 @@ function applyAdminStatsVisibility() {
   }
 }
 
+function getOrCreateVisitorId() {
+  let visitorId = localStorage.getItem("mibVisitorId");
+
+  if (!visitorId) {
+    visitorId = "v_" + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem("mibVisitorId", visitorId);
+  }
+
+  return visitorId;
+}
+
+async function trackVisitorStats() {
+  console.log("🔥 trackVisitorStats 실행됨");
+
+  try {
+    const visitorId = getOrCreateVisitorId();
+
+    const response = await fetch("/api/stats/track", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ visitorId }),
+    });
+
+    const data = await response.json();
+    console.log("📊 stats 응답:", data);
+
+    if (data.success) {
+      renderStats(data.stats);
+    }
+  } catch (error) {
+    console.error("통계 오류:", error);
+  }
+}
+
 refreshBtn.addEventListener("click", () => loadBriefing(true));
 
 applyAdminStatsVisibility();
